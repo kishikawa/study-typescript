@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.tsx
+import { useState } from 'react';
+import Greeting from './Greeting'; // 作ったパーツを読み込む
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  // name という変数と、それを更新する setName 関数を用意
+  const [name, setName] = useState('');
+  // age という変数と、それを更新する setAge 関数を用意
+  const [age, setAge] = useState('');
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+    <div className="App">
+      <h1>React + Vite + Docker</h1>
+      
+      {/* Greeting コンポーネントに name を渡す */}
+      <Greeting name={name} /> {/* name プロパティを渡す */}
+      <Greeting age={age} /> {/* age プロパティを渡す */}
+
+      <div className="name-card">
+        <input
+          type="text"
+          placeholder="あなたの名前は？"
+          value={name}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          onChange={(e) => setName(e.target.value)} // 入力されたら name を更新
+          style={{ padding: '8px', fontSize: '1rem' }}
+        />
+        <div className="age-card">
+          <input
+            type="number"
+            placeholder="あなたの年齢は？"
+            value={age}
+            onChange={(e: { target: { value: any; }; }) => setAge(e.target.value)} // 入力されたら age を更新
+            style={{ padding: '8px', fontSize: '1rem', marginTop: '10px' }}
+          />
+        </div>
+        <br />
         <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+          入力すると上の文字がリアルタイムで変わります。
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
