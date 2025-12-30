@@ -1,0 +1,11 @@
+services:
+  app:
+    build: .
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules # node_modules はコンテナ側を優先させる
+    environment:
+      - WATCHPACK_POLLING=true # 環境によってホットリロードが効かない場合の対策
+    tty: true
